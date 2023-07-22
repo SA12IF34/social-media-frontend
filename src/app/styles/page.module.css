@@ -1,0 +1,43 @@
+.side {
+  width: 20vw;
+  height: 100vh;
+  border-right: 1px solid white;
+  padding: 20px;
+}
+
+.navigate {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.smProfile {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .side {
+    width: 100vw;
+    height: max-content;
+    position: absolute;
+    bottom: 0;
+    border: none;
+    border-top: 1px solid white;
+    padding: 7px;
+  }
+  .side>h1,
+  .side>br {
+    display: none;
+  }
+
+  .navigate {
+    flex-direction: row; 
+  }
+
+  .smProfile {
+    display: block;
+  }
+
+}
