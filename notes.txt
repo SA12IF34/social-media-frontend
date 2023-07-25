@@ -1,0 +1,5 @@
+# Navigation Icons (from react-icons library) :
+  - BiHomeAlt2 (for home)
+  - GoSearch   (for search)
+  - MdOutlineNotificationsNone (for notification)
+  - BiImageAdd (for create-post)
