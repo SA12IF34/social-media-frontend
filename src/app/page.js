@@ -8,7 +8,7 @@ import MainContent from './components/HomeContent';
 
 
 async function getAccount() {
-  const res = await fetch("http://192.168.100.1:8000/projects/social_media/me/", {
+  const res = await fetch("http://0.0.0.0:8000/projects/social_media/me/", {
     method: 'GET',
     headers: {
       Cookie: cookies().toString()
