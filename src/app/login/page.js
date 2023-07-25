@@ -9,7 +9,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const api = axios.create({
-    baseURL: 'http://192.168.100.26:8000/projects/social_media/'
+    baseURL: 'http://192.168.100.1:8000/projects/social_media/'
 })
 
 export default function Account() {
