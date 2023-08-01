@@ -124,7 +124,7 @@ export default async function MyProfile() {
                         <span>
                             followers {followers.length}
                         </span>
-                    </div>
+                    </div> 
                     <Link href={'/me/settings/'} className={styles.settings}>
                         <RiSettings5Fill />
                     </Link>
