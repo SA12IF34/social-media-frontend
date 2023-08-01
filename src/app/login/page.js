@@ -45,10 +45,9 @@ export default function Account() {
     }
 
     useEffect(() => {
-        // if (localStorage.getItem('auth')) {
-        //     window.location.assign('/');
-        // }
-        getToken();
+        if (localStorage.getItem('auth')) {
+            window.location.assign('/');
+        }
     }, [])
 
     return (
