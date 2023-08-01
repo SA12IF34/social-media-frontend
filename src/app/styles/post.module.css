@@ -245,9 +245,6 @@
     margin: 10px;
 }
 
-.barNone {
-    display: none;
-}
 
 
 @media screen and (max-width: 913px) {
@@ -295,4 +292,8 @@
     .postImgContainer {
         width: 80%;
     }
+    .barNone {
+        display: none;
+    }
+    
 }
