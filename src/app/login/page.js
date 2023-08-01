@@ -1,6 +1,7 @@
 'use client';
-import { useRef } from 'react';
-// import { cookies } from 'next/headers';
+import { useRef, useEffect } from 'react';
+import Head from 'next/head';
+import Link from 'next/link'
 import styles from '@/app/styles/account.module.css';
 import axios from 'axios';
 
@@ -9,8 +10,9 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const api = axios.create({
-    baseURL: 'http://0.0.0.0:8000/projects/social_media/'
+    baseURL: 'https://saifchan.site/projects/social_media/'
 })
+
 
 export default function Account() {
 
@@ -19,22 +21,38 @@ export default function Account() {
     const pswrdRef = useRef();
 
     async function handleLogin() {
-        const res = await api.post('create-account/', {
-            username: nameRef.current.value,
+        const res = await api.post('login/', {
+            username: nameRef.current.value.toLowerCase(),
             email: emailRef.current.value,
             password: pswrdRef.current.value
         })
         if (res.status === 202) {
-            console.log("YES !!");
+            window.localStorage.setItem('auth', 'yes');
+            window.location.assign('/');
+        }else if (res.status === 404) {
+            alert("user not found");
         }
     }
 
+    
+
+
+    useEffect(() => {
+        if (localStorage.getItem('auth')) {
+            window.location.assign('/');
+        }
+    }, [])
+
     return (
+        <>
+        <Head>
+            <title>login</title>
+        </Head>
         <div className={styles.main}>
             <div>
-                <p>
-
-                </p>
+                <h3>
+                    Login :
+                </h3>
                 <br />
                 <form onSubmit={(e) => {
                     e.preventDefault();
@@ -48,7 +66,12 @@ export default function Account() {
                     <br />
                     <input type='submit' value='submit' />
                 </form>
+                <br />
+                <span>or</span>
+                <br />
+                <Link href={'/register/'}>create account</Link>
             </div>
         </div>
+        </>
     )
 }

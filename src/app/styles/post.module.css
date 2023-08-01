@@ -1,10 +1,14 @@
 .container {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: max-content;
     display: flex;
     --color: rgba(97, 97, 97, 0.75);
+    position: relative;
 }
 
+
+/* Create Post Page */
 .playground {
     width: 85vw;
     height: 100vh;
@@ -22,16 +26,32 @@
     position: relative;
     width: 100%;
     height: 100%;
-    line-height: 1.45;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-    font-size: 1.2em;
     border-radius: 10px;
     border: 1px solid var(--color);
-    outline: none;
     padding: 15px;
     background-color: black;
-    color: white;
+    overflow-y: scroll;
 }
+.write::-webkit-scrollbar {
+    width: 5px;
+    background-color: black;
+}
+.write::-webkit-scrollbar-thumb {
+    background-color: var(--color);
+}
+
+.write span {
+    display: block;
+    width: 100%;
+    height: max-content;
+    background-color: transparent;
+    outline: none;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-size: 1.2em;
+    color: white;
+    line-height: 1.45;
+}
+
 
 .assets {
     width: 20vw;
@@ -44,6 +64,10 @@
     margin: 5px;
 }
 
+.assets label {
+    padding: 5px 7px;
+}
+.assets label,
 .assets button {
     width: 80px;
     height: 30px;
@@ -53,6 +77,19 @@
     border: 1px solid var(--color);
     border-radius: 5px;
 }
+.assets input {
+    display: none;
+}
+
+.imgContainer {
+    width: 80%;
+    height: max-content;
+    margin: auto;
+}
+.imgContainer img {
+    width: 100%;
+    height: auto;
+}
 
 .share {
     position: absolute;
@@ -61,4 +98,197 @@
     width: 100px;
     height: 35px;
     font-size: large;
+}
+
+
+
+/* Post Page */
+
+.main {
+    width: 80vw;
+    min-height: 100vh;
+}
+
+.postContainer {
+    width: 60vw;
+    min-height: 100vh;
+    border-left: 1px solid var(--color);
+    border-right: 1px solid var(--color);
+    margin: auto;
+    padding: 15px;
+}
+
+.post {
+    width: 100%;
+    min-height: 90vh;
+    height: max-content;
+    border-bottom: 1px solid var(--color);
+}
+
+.post a {
+    color: white;
+    text-decoration: none;
+}
+
+.postAuthor {
+    width: 100%;
+    height: 70px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.postAuthor>a>div {
+    display: flex;
+    align-items: center;
+}
+.postAuthor>a {
+    width: 100%;
+
+}
+.img {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+.img img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.postAuthor>a>div span {
+    margin-left: 10px;
+}
+
+.postAuthor button {
+    width: max-content;
+    height: max-content;
+    padding: 7px;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    border-radius: 7px;
+}
+
+.postContent {
+   width: 100%;
+   min-height: calc(90vh - 70px); 
+   height: max-content;
+   padding: 10px;
+}
+.postContent>p {
+    width: auto;
+    height: max-content;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.postImgContainer {
+    width: 65%;
+    height: max-content;
+    margin: auto;
+}
+
+.postImgContainer img {
+    width: 100%;
+    height: auto;
+}
+
+.postComment {
+    width: 100%;
+    height: max-content;
+    padding: 10px;
+    border-bottom: 1px solid var(--color);
+}
+.postComment>h4 {
+    font-weight: 500;
+}
+.postComment>div {
+    display: flex;
+}
+
+.commentInput,
+.commentBtn {
+    height: max-content;
+    padding: 7px;
+    background-color: black;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    margin: 5px;
+}
+.commentInput {
+    width: 85%;
+    border-left: 1px solid white;
+}
+.commentBtn {
+    width: 15%;
+    cursor: pointer;
+}
+
+.comment {
+    width: 100%;
+    height: max-content;
+    padding: 10px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--color);
+}
+.commentContent {
+    margin: 10px;
+}
+
+
+@media screen and (max-width: 913px) {
+
+    .playground {
+        width: 100vw;
+    }
+
+    .board {
+        width: 100vw;
+        height: 88vh;
+        top: 7vh;
+    }
+
+    .assets {
+        position: absolute;
+        width: 100%;
+        height: 7vh;
+        z-index: 1000;
+        background: black;
+        border: none;
+        border-bottom: 1px solid white;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .assets h2,
+    .assets h5,
+    .assets br {
+        display: none;
+    }
+
+    .assets .share {
+        position: relative;
+    }
+
+    .main {
+        width: 100vw;
+    }
+
+    .postContainer {
+        width: 100%;
+    }
+
+    .postImgContainer {
+        width: 80%;
+    }
 }

@@ -2,7 +2,7 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    --personal-c: rgba(97, 97, 97, 0.75);
+    --color: rgba(97, 97, 97, 0.75);
 }
 
 .main {
@@ -19,6 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .img {
@@ -26,6 +27,16 @@
     height: 70px;
     border-radius: 50%;
     background-color: white;
+    position: relative;
+    overflow: hidden;
+}
+.img img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .name {
@@ -58,20 +69,165 @@
     border: none;
 }
 
-.posts {
+.profileContainer {
     width: 100%;
     height: 75vh;
     overflow-y: scroll;
 }
-.posts>div {
+.profileContainer::-webkit-scrollbar {
+    width: 5px;
+    background-color: black;
+}
+.profileContainer::-webkit-scrollbar-thumb {
+    background-color: var(--color);
+}
+
+.profileContainer>div {
     width: 80%;
     min-width: 500px;
     min-height: 100%;
     height: max-content;
     margin: auto;
-    border-left: 1px solid var(--personal-c);
-    border-right: 1px solid var(--personal-c);
+    border-left: 1px solid var(--color);
+    border-right: 1px solid var(--color);
+}
+
+.list {
+    width: 100%;
+    height: max-content;
+    padding: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color);
+    display: flex;
+    justify-content: space-evenly;
+}
+.list>button {
+    width: max-content;
+    height: max-content;
+    background-color: black;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    padding: 3px;
+    padding-top: 0px;
+}
+
+.clicked {
+    border-bottom: 1px solid white !important; 
+}
+
+.account {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid white;
+}
+
+.account .img {
+    width: 55px;
+    height: 55px;
+}
+.account>div:nth-child(2) {
+    margin-left: 15px;
+    font-weight: 500 !important;
+}
+
+.content h2 {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
 }
 
 
+.post {
+    width: 90%;
+    min-height: 350px;
+    height: max-content;
+    padding: 20px;
+    margin: auto;
+    border-top: 1px solid var(--color);
+    margin-bottom: 25px;
+}
+.post p {
+    width: auto;
+    height: max-content;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.post>div {
+    width: 50%;
+    height: max-content;
+    margin: auto;
+}
+.post>div img {
+    width: 100%;
+    height: auto;
+}
+
+.followBtn {
+    position: absolute;
+    width: 100px;
+    height: max-content;
+    background-color: white;
+    color: black;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    bottom: 5%;
+    right: 1%;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.postInfo {
+    width: 100%;
+    height: max-content;
+    padding: 20px;
+    display: flex;
+}
+.postInfo span {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
+.postInfo svg {
+    color: white;
+    font-size: 1.5em;
+}
+
+@media screen and (max-width: 913px) {
+    .main {
+        width: 100vw;
+        border: none;
+    }
+
+    .info {
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 20px;
+    }
+    .info>div:nth-child(1) {
+        display: flex;
+        width: 100%;
+        align-items: center;
+    }
+    .info>div:nth-child(2) {
+        min-width: 0;
+        width: 100%;
+    }
+    .profileContainer>div {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .post>div {
+        width: 80%;
+    }
+}
 

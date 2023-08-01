@@ -1,9 +1,6 @@
 'use client';
-import Head from 'next/head';
-import { redirect } from 'next/navigation';
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from '@/app/styles/settings.module.css';
-import SideBar from '@/app/components/SideBar';
 import {AiOutlineEdit} from 'react-icons/ai';
 import validator from 'validator';
 import axios from 'axios';
@@ -16,27 +13,9 @@ const api = axios.create({
     baseURL: 'https://saifchan.site/projects/social_media/'
 })
 
-export default function Settings() {
 
-    const [username, setUsername] = useState();
-    const [email, setEmail] = useState();
-    const [img, setImg] = useState(null);
+function SettingsContent({username, email, img}) {
 
-
-    async function getAccount() {
-        try {
-            const res = await api.get('me/');
-        
-            if (res.status === 200) {
-                const data = await res.data;
-                setUsername(data['username']);
-                setEmail(data['email']);
-                setImg(data['profile_img']);
-            }
-        } catch (error) {
-            window.location.assign('/');
-        }
-    }
 
     async function handleEdit(data) {
         const res = await api.patch("me/", data, {
@@ -209,14 +188,8 @@ export default function Settings() {
 
 
 
-    return (
-        <>
-        <Head>
-            <title>settings</title>
-        </Head>
-        <div className={styles.settings}>
-            <SideBar />
-            <div className={styles.main}>
+  return (
+    <div className={styles.main}>
                 <div>
                     <div className={styles.img}>
                         {img && <img src={'https://saifchan.site'+img} />}
@@ -266,7 +239,7 @@ export default function Settings() {
                     close account
                 </button>
             </div>
-        </div>
-        </>
-    )
+  )
 }
+
+export default SettingsContent

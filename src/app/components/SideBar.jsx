@@ -1,17 +1,34 @@
 'use client';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import styles from '@/app/styles/page.module.css';
 import Link from 'next/link';
+import {redirect} from 'next/navigation';
 import {BiHomeAlt2, BiImageAdd, BiSearch, BiArrowBack} from 'react-icons/bi';
-import {MdOutlineNotificationsNone} from 'react-icons/md'
+import {MdOutlineNotificationsNone} from 'react-icons/md';
+import {CgProfile} from 'react-icons/cg'
+import axios from 'axios';
 
-function SideBar({img}) {
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
 
+const api = axios.create({
+    baseURL: 'https://saifchan.site/projects/social_media/'
+})
+
+
+function SideBar({content, isPostPage}) {
+  if (isPostPage) {
+    return (
+        <></>
+    )
+  }
   const [searchVal, setSearchVal] = useState('');
+  const searchRef = useRef();
+  const [results, setResults] = useState([]);
   let val = '';
   
   let n = 0;
-  let num = 0;
   useEffect(() => {
     if (n < 1) {
 
@@ -19,58 +36,60 @@ function SideBar({img}) {
 
         let search = document.getElementById("search");
         search.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            let searchContainer = document.getElementById("searchContainer");
-            let searchInput =document.getElementById("searchInput");
-            let inputBtn = document.getElementById("searchBtn");
-            let back = document.getElementById("searchBack");
-
-            searchInput.value = searchVal;
-            searchInput.onchange = (e) => {
-                setSearchVal(e.target.value);
-                val = e.target.value;
-            }
-        
-            inputBtn.onclick = () => {
-                console.log(val);
-            }
-
-            side.classList.remove(styles.sideExtend)
-            side.classList.add(styles.sideShrink);
-            searchContainer.classList.remove(styles.shrink);
-            searchContainer.classList.add(styles.extend);
             
 
-            back.onclick = () => {
-                side.classList.remove(styles.sideShrink);
-                side.style.style = 'width: calc(15vw - 80%)';
-                side.classList.add(styles.sideExtend);
-                searchContainer.classList.remove(styles.extend);
-                searchContainer.classList.add(styles.shrink);
+            if (window.matchMedia('(min-width: 914px').matches) {
+                e.preventDefault();
+                let searchContainer = document.getElementById("searchContainer");
+                let searchInput =document.getElementById("searchInput");
+                let inputBtn = document.getElementById("searchBtn");
+                let back = document.getElementById("searchBack");
+
+                searchInput.value = searchVal;
+                searchInput.onchange = (e) => {
+                    setSearchVal(e.target.value);
+                    val = e.target.value;
+                }
+            
+
+                side.classList.remove(styles.sideExtend)
+                side.classList.add(styles.sideShrink);
+                searchContainer.classList.remove(styles.shrink);
+                searchContainer.classList.add(styles.extend);
                 
+
+                back.onclick = () => {
+                    side.classList.remove(styles.sideShrink);
+                    side.style.style = 'width: calc(15vw - 80%)';
+                    side.classList.add(styles.sideExtend);
+                    searchContainer.classList.remove(styles.extend);
+                    searchContainer.classList.add(styles.shrink);
+                    
+                }
             }
 
         })
 
         let notifications = document.getElementById("notifications")
         notifications.addEventListener("click", (e) => {
-            e.preventDefault();
+            if (window.matchMedia('(min-width: 914px)').matches) {
+                e.preventDefault();
 
-            let notificationsContainer = document.getElementById('notificationsContainer')
-            let back = document.getElementById("notificationsBack")
+                let notificationsContainer = document.getElementById('notificationsContainer')
+                let back = document.getElementById("notificationsBack")
 
-            side.classList.remove(styles.sideExtend)
-            side.classList.add(styles.sideShrink);
-            notificationsContainer.classList.remove(styles.shrink);
-            notificationsContainer.classList.add(styles.extend);
-        
-            back.onclick = () => {
-                side.classList.remove(styles.sideShrink);
-                side.style.style = 'width: calc(15vw - 80%)';
-                side.classList.add(styles.sideExtend);
-                notificationsContainer.classList.remove(styles.extend);
-                notificationsContainer.classList.add(styles.shrink);
+                side.classList.remove(styles.sideExtend)
+                side.classList.add(styles.sideShrink);
+                notificationsContainer.classList.remove(styles.shrink);
+                notificationsContainer.classList.add(styles.extend);
+            
+                back.onclick = () => {
+                    side.classList.remove(styles.sideShrink);
+                    side.style.style = 'width: calc(15vw - 80%)';
+                    side.classList.add(styles.sideExtend);
+                    notificationsContainer.classList.remove(styles.extend);
+                    notificationsContainer.classList.add(styles.shrink);
+                }
             }
 
         })  
@@ -78,6 +97,21 @@ function SideBar({img}) {
         n = 1;
     }
   }, [])
+
+  async function handleSearch(term) {
+    if (term !== '') {
+        const res = await api.get(`search/${term}/`);
+
+        if (res.status === 200) {
+            const data = await res.data;
+
+            setResults(data);
+
+        }
+    } else {
+        setResults([]);
+    }
+  }
 
   return (
     <div id='grandParent' className={styles.sideParent}>
@@ -88,7 +122,11 @@ function SideBar({img}) {
         <br />
         <div className={styles.navigate}>
             <div className={styles.smProfile}>
-                {img && (<img src={img} alt="profile img" />)}
+            <Link href={'/me/'}>
+                
+                    <CgProfile />                
+                
+            </Link>
             </div>
             <div>
                 <Link id='home' href={'/'}>
@@ -129,12 +167,30 @@ function SideBar({img}) {
         <BiArrowBack />
         </button>
         <div style={{width: '100%', height: 'max-content', display: 'flex', justifyContent: 'space-evenly'}}>
-            <input id='searchInput' type="text" />
+            <input onChange={(e) => {
+                handleSearch(searchRef.current.value);
+            }} id='searchInput' type="text" ref={searchRef} />
             <button id='searchBtn'>
                 <BiSearch />
             </button>
         </div>
-        <ul></ul>
+        <ul id='searchResults' className={styles.results}>
+            {results.map(a => {
+                return (
+                    <li>
+                        <Link style={{color: 'white', textDecoration: 'none'}} href={`users/${a.id}/`}>
+                            <div className={styles.img}>
+                                {a['profile_img'] && <img src={'https://saifchan.site'+a['profile_img']} />}
+                            </div>
+                            <div>
+                                <h4>{a['fname']} {a['lname']}</h4>
+                                <h5>@{a['username']}</h5>
+                            </div>
+                        </Link>
+                    </li>
+                )
+            })}
+        </ul>
     </div>
     <div id='notificationsContainer' className={styles.notifications}>
         <button id='notificationsBack'>
@@ -144,7 +200,7 @@ function SideBar({img}) {
 
         </ul>
     </div> 
-    </div>
+    </div> 
   )
 }
 

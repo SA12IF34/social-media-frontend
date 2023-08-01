@@ -1,15 +1,16 @@
-// 'use client'
-import Image from 'next/image';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import styles from '@/app/styles/profile.module.css';
 import SideBar from '../components/SideBar';
+import Profile from '../components/Profile';
 import {RiSettings5Fill} from 'react-icons/ri';
 
 
+const baseUrl = 'https://saifchan.site/projects/social_media/';
+
 async function getAccount() {
-    const res = await fetch('http://0.0.0.0:8000/projects/social_media/me/', {
+    const res = await fetch(baseUrl+'me/', {
         method: 'GET',
         headers: {
             Cookie: cookies().toString()
@@ -24,36 +25,104 @@ async function getAccount() {
     } else {
         redirect("/");
     }
-
-
 }
 
-export default async function PersonalProfile() {
+async function getPosts() {
+    const res = await fetch(baseUrl+'posts/', {
+        method: 'GET',
+        headers: {
+            Cookie: cookies().toString()
+        },
+        cache: 'no-store'
+    })
 
-    const data = await getAccount();
+    if (res.status === 200) {
+        const data = await res.json();
 
-    let posts = true;
+        return data;
+    }
 
+    return false;
+}
+
+async function getFollowers() {
+    const res = await fetch(baseUrl+'followers/', {
+        method: 'GET',
+        headers: {
+            Cookie: cookies().toString()
+        }, 
+        cache: 'no-store'
+    })
+
+    if (res.status === 200) {
+        const data = await res.json();
+        
+        return data;
+    }
+
+    return false;
+}
+
+async function getFollowings() {
+    const res = await fetch(baseUrl+'follow/', {
+        method: 'GET',
+        headers: {
+            Cookie: cookies().toString()
+        },
+        cache: 'no-store'
+    });
+
+    if (res.status === 200) {
+        const data = await res.json();
+
+        return data;
+
+    }
+} 
+
+export const metadata = {
+    title: 'my profile'
+}
+
+export default async function MyProfile() {
+
+    let data;
+    let posts;
+    let followers;
+    let followings;
+    try {
+        data = await getAccount();
+        posts = await getPosts();
+        followers = await getFollowers();
+        followings = await getFollowings();
+    } catch (error) {
+        redirect('/');
+    }
+
+    
+    
     return (
+        <>
+
         <div className={styles.profile}>
             <SideBar />
             <main className={styles.main}>
                 <div className={styles.info}>
                     <div>
                         <div className={styles.img}>
-
+                        {data['profile_img'] && <img src={'https://saifchan.site'+data['profile_img']} />}
                         </div>
                         <div className={styles.name}>
-                            <h3>{data['name']}</h3>
-                            <h4>@{data['name']}</h4>
+                            <h3>{data['fname']} {data['lname']}</h3>
+                            <h4>@{data['username']}</h4>
                         </div>
                     </div>
                     <div>
                         <span>
-                            followings {data['followings'].length}
+                            following {data['followings'].length}
                         </span>
                         <span>
-                            followers {data['followers_number']}
+                            followers {followers.length}
                         </span>
                     </div>
                     <Link href={'/me/settings/'} className={styles.settings}>
@@ -61,15 +130,9 @@ export default async function PersonalProfile() {
                     </Link>
                 </div>
 
-                <div className={styles.posts}>
-                    
-                        <div>
-                        {posts && (
-                            <h2>hillw</h2>
-                        )}
-                        </div>
-                </div>
+                <Profile followers={followers} followings={followings} posts={posts} me={true} />
             </main>
         </div>
+        </>
     )
 }
