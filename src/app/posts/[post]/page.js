@@ -57,7 +57,7 @@ export default async function Post({params: { post }}) {
     return (
         <div className={styles.container}>
             
-            <SideBar />
+            <SideBar className={styles.barNone} />
             
             <div className={styles.main}>
                 <div className={styles.postContainer}>

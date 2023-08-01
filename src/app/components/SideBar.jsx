@@ -17,14 +17,7 @@ const api = axios.create({
 })
 
 
-function SideBar({content}) {
-  if (window) {
-    if (window.matchMedia('(max-width:911px)').matches) {
-        return (
-            <></>
-        )
-      }
-  }
+function SideBar({content, className}) {
   const [searchVal, setSearchVal] = useState('');
   const searchRef = useRef();
   const [results, setResults] = useState([]);
@@ -116,7 +109,7 @@ function SideBar({content}) {
   }
 
   return (
-    <div id='grandParent' className={styles.sideParent}>
+    <div id='grandParent' className={`${styles.sideParent} ${className}`}>
         <section id='side' className={styles.side}>
         <Link href={'/'}> 
             <h1>Name</h1>
