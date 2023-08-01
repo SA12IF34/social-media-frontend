@@ -38,7 +38,9 @@ export default function Account() {
     async function getToken() {
         const res = await api.get('token/');
         if (res.status === 200) {
+            console.log("yes")
             window.location.reload();
+
         }
     }
 
