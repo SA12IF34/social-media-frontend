@@ -57,7 +57,7 @@ export default async function Post({params: { post }}) {
     return (
         <div className={styles.container}>
             
-            <SideBar isPostPage={window.matchMedia('(max-width:911px)').matches} />
+            <SideBar />
             
             <div className={styles.main}>
                 <div className={styles.postContainer}>

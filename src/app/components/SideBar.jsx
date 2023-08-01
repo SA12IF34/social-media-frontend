@@ -17,8 +17,8 @@ const api = axios.create({
 })
 
 
-function SideBar({content, isPostPage}) {
-  if (isPostPage) {
+function SideBar({content}) {
+  if (window.matchMedia('(max-width:911px)').matches) {
     return (
         <></>
     )
