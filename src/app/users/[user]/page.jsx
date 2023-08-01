@@ -69,13 +69,11 @@ export default async function User({params: {user}}) {
     let data;
     let userPosts;
     let isFollowing;
-    try {
-        data = await getUser(user);
-        userPosts = await getUserPosts(data['id']);
-        isFollowing = await checkFollow(data['id'], data['id']);    
-    } catch (error) {
-        redirect('/');
-    }
+
+    data = await getUser(user);
+    userPosts = await getUserPosts(data['id']);
+    isFollowing = await checkFollow(data['id'], data['id']);    
+    
 
     return (
         <div className={styles.profile}>
