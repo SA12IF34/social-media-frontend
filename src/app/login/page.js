@@ -35,12 +35,18 @@ export default function Account() {
     }
 
     
-
+    async function getToken() {
+        const res = await api.get('token/');
+        if (res.status === 200) {
+            window.location.reload();
+        }
+    }
 
     useEffect(() => {
-        if (localStorage.getItem('auth')) {
-            window.location.assign('/');
-        }
+        // if (localStorage.getItem('auth')) {
+        //     window.location.assign('/');
+        // }
+        getToken();
     }, [])
 
     return (
