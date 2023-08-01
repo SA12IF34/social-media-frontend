@@ -29,6 +29,7 @@ function Post({len, p}) {
   }
 
   useEffect(() => {
+    setAuthor(null);
     getAuthor();
   }, [len])
 

@@ -13,7 +13,7 @@ const api = axios.create({
 })
 
 
-function MainContent({id}) {
+function MainContent() {
 
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState([]);
@@ -84,11 +84,10 @@ function MainContent({id}) {
         <div className={styles.content}>
             { content.length > 0 ?
               content.map((p) => {
-                if (p.author !== id ) {
                   return (
                     <Post len={content.length} p={p} />
                   )
-                }
+                
               }) : contentType === 'latest'? (<h2 className={styles.msg}>no one has shared anything yet</h2>) : (<h2 className={styles.msg}>Here posts of people you follow will appear</h2>)
             }
         </div>
