@@ -18,10 +18,12 @@ const api = axios.create({
 
 
 function SideBar({content}) {
-  if (window.matchMedia('(max-width:911px)').matches) {
-    return (
-        <></>
-    )
+  if (window) {
+    if (window.matchMedia('(max-width:911px)').matches) {
+        return (
+            <></>
+        )
+      }
   }
   const [searchVal, setSearchVal] = useState('');
   const searchRef = useRef();
