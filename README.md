@@ -1,7 +1,7 @@
 # The frontend of social media portfolio project
 ## built using NextJs
 
-##
+#
 
 ## Getting Started
 
