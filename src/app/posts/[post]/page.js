@@ -5,7 +5,7 @@ import Comments from "@/app/components/Comments";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const baseUrl = 'https://saifchan.site';
+const baseUrl = 'https://saifchan.online';
 
 async function getPost(postId) {
     const res = await fetch(`${baseUrl}/projects/social_media/posts/${postId}/`, {

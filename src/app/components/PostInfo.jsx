@@ -9,7 +9,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const api = axios.create({
-    baseURL: 'https://saifchan.site/projects/social_media/'
+    baseURL: 'https://saifchan.online/projects/social_media/'
 })
 
 function PostInfo({postId, likes, dislikes}) {

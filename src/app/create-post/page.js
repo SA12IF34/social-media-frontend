@@ -15,7 +15,7 @@ const isAuthenticated = () => {
 }
 
 async function getAccount() {
-    const res = await fetch('https://saifchan.site/projects/social_media/me/', {
+    const res = await fetch('https://saifchan.online/projects/social_media/me/', {
         method: 'GET',
         headers: {
             Cookie: cookies().toString()

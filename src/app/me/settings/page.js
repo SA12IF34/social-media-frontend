@@ -13,7 +13,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const api = axios.create({
-    baseURL: 'https://saifchan.site/projects/social_media/'
+    baseURL: 'https://saifchan.online/projects/social_media/'
 })
 
 export default function Settings() {
@@ -219,7 +219,7 @@ export default function Settings() {
             <div className={styles.main}>
                 <div>
                     <div className={styles.img}>
-                        {img && <img src={'https://saifchan.site'+img} />}
+                        {img && <img src={'https://saifchan.online'+img} />}
                     </div>
                     <label htmlFor='img' className={styles.imgBtn}>
                         <h4 >change image</h4>

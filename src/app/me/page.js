@@ -7,7 +7,7 @@ import Profile from '../components/Profile';
 import {RiSettings5Fill} from 'react-icons/ri';
 
 
-const baseUrl = 'https://saifchan.site/projects/social_media/';
+const baseUrl = 'https://saifchan.online/projects/social_media/';
 
 async function getAccount() {
     const res = await fetch(baseUrl+'me/', {
@@ -110,7 +110,7 @@ export default async function MyProfile() {
                 <div className={styles.info}>
                     <div>
                         <div className={styles.img}>
-                        {data['profile_img'] && <img src={'https://saifchan.site'+data['profile_img']} />}
+                        {data['profile_img'] && <img src={'https://saifchan.online'+data['profile_img']} />}
                         </div>
                         <div className={styles.name}>
                             <h3>{data['fname']} {data['lname']}</h3>

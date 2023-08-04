@@ -13,7 +13,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const api = axios.create({
-    baseURL: 'https://saifchan.site/projects/social_media/'
+    baseURL: 'https://saifchan.online/projects/social_media/'
 })
 
 
@@ -175,7 +175,7 @@ function SideBar({content, className}) {
                     <li>
                         <Link style={{color: 'white', textDecoration: 'none'}} href={`users/${a.id}/`}>
                             <div className={styles.img}>
-                                {a['profile_img'] && <img src={'https://saifchan.site'+a['profile_img']} />}
+                                {a['profile_img'] && <img src={'https://saifchan.online'+a['profile_img']} />}
                             </div>
                             <div>
                                 <h4>{a['fname']} {a['lname']}</h4>
