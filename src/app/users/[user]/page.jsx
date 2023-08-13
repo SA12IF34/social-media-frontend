@@ -5,7 +5,7 @@ import SideBar from '@/app/components/SideBar';
 import FollowBtn from '@/app/components/FollowBtn';
 import Profile from '@/app/components/Profile';
 
-const baseUrl = 'https://saifchan.online';
+const baseUrl = process.env.BASE_URL;
 async function getUser(userId) {
     const res = await fetch(`${baseUrl}/projects/social_media/accounts/${userId}/`, {
         method: 'GET',
@@ -85,7 +85,7 @@ export default async function User({params: {user}}) {
                 <div className={styles.info}> 
                     <div>
                         <div className={styles.img}>
-                        {data['profile_img'] && <img  src={'https://saifchan.online'+data['profile_img']}/>}
+                        {data['profile_img'] && <img  src={process.env.BASE_URL+data['profile_img']}/>}
                         </div>
                         <div className={styles.name}>
                             <h3>{data['fname']} {data['lname']}</h3>

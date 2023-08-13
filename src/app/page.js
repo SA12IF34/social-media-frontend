@@ -5,7 +5,7 @@ import styles from './styles/page.module.css';
 import SideBar from './components/SideBar';
 import MainContent from './components/HomeContent';
 
-const baseUrl = 'https://saifchan.online/projects/social_media/';
+const baseUrl = process.env.BASE_URL+'/projects/social_media/';
 
 async function getAccount() {
   const res = await fetch(baseUrl+"me/", {
@@ -47,17 +47,7 @@ async function getFollowings() {
   }
 }
 
-// async function getLatest() {
-//   const res = await fetch(baseUrl+'posts/latest/', {
-//     method: 'GET',
-//     headers: {
-//       Cookie: cookies().toString()
-//     },
-//     cache: 'no-store'
-//   })
-// }
 
-// check website blueprint
 export default async function Home() {
   let serverDown;
   let user;
@@ -87,7 +77,7 @@ export default async function Home() {
                   <Link href={'/me/'}>
                     <div className={styles.info}>
                       <div className={styles.img}>
-                        {user.profile_img && <img src={'https://saifchan.online'+user.profile_img} />}
+                        {user.profile_img && <img src={process.env.BASE_URL+user.profile_img} />}
                       </div>
                       <div >
                         <h4>{user['fname']} {user['lname']}</h4>
@@ -103,7 +93,7 @@ export default async function Home() {
                       <Link href={`/users/${f.id}`}>
                         <div className={styles.followings}>
                           <div className={styles.img}>
-                            {f.profile_img && <img src={'https://saifchan.online'+f.profile_img} />}
+                            {f.profile_img && <img src={process.env.BASE_URL+f.profile_img} />}
                           </div>
                           <div>
                             <h4>{f['fname']} {f['lname']}</h4>

@@ -1,11 +1,12 @@
 import SideBar from "@/app/components/SideBar";
 import styles from '@/app/styles/post.module.css';
 import Header from '@/app/components/PostHeader';
+import Reaction from "@/app/components/Reaction";
 import Comments from "@/app/components/Comments";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const baseUrl = 'https://saifchan.online';
+const baseUrl = process.env.BASE_URL;
 
 async function getPost(postId) {
     const res = await fetch(`${baseUrl}/projects/social_media/posts/${postId}/`, {
@@ -77,6 +78,7 @@ export default async function Post({params: { post }}) {
                                 )}
                             </div>
                         </div>
+                        <Reaction post={postObj} />
                     </div>
                     
                     <Comments postId={post} comments={postComments} />

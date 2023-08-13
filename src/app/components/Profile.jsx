@@ -40,7 +40,7 @@ function Profile({
                     <br />
                     <br />
                     <div>
-                        {p.file && <img src={'https://saifchan.online'+p.file} alt="post " />}
+                        {p.file && <img src={process.env.NEXT_PUBLIC_BASE_URL+p.file} alt="post " />}
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@ function Profile({
         <Link href={`/users/${f['user']}`} style={{color: 'white', textDecoration: 'none'}}>
             <div className={styles.account}>
                 <div className={styles.img}>
-                    {f['profile_img'] && <img src={'https://saifchan.online'+f['profile_img']} />}
+                    {f['profile_img'] && <img src={process.env.NEXT_PUBLIC_BASE_URL+f['profile_img']} />}
                 </div>
                 <div>
                     <h4>{f['fname']} {f['lname']}</h4>

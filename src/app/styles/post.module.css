@@ -201,6 +201,24 @@
     height: auto;
 }
 
+.reactions {
+  width: max-content;
+  height: max-content;
+  margin: 20px 0;
+}
+
+.reactions span {
+  display: inline-flex;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+}
+.reactions span,
+.reactions span svg {
+  font-size: 1.2em;
+  margin-right: 5px;
+}
+
 .postComment {
     width: 100%;
     height: max-content;
