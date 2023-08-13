@@ -9,7 +9,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const api = axios.create({
-    baseURL: 'https://saifchan.online/projects/social_media/'
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
 })
 
 
@@ -54,6 +54,7 @@ function MainContent() {
       setLoading(false);
     }
 
+
     let types = document.querySelectorAll("#contentType h4");
 
     types.forEach(t => {
@@ -85,7 +86,7 @@ function MainContent() {
             { content.length > 0 ?
               content.map((p) => {
                   return (
-                    <Post len={content.length} p={p} />
+                    <Post len={content.length} p={p} /> 
                   )
                 
               }) : contentType === 'latest'? (<h2 className={styles.msg}>no one has shared anything yet</h2>) : (<h2 className={styles.msg}>Here posts of people you follow will appear</h2>)

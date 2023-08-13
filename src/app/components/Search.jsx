@@ -9,7 +9,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const api = axios.create({
-    baseURL: 'https://saifchan.online/projects/social_media/'
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
 })
 
 
@@ -44,7 +44,7 @@ function Search() {
                     <li key={result.id}>
                         <Link href={`/users/${result.id}/`}>
                         <div className={styles.img}>
-                            {result.profile_img && <img src={'https://saifchan.online'+result.profile_img} />}
+                            {result.profile_img && <img src={process.env.NEXT_PUBLIC_BASE_URL+result.profile_img} />}
                         </div>
                         <div className={styles.names}>
                             <h4>{result.fname} {result.lname}</h4>

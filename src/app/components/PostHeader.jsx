@@ -53,7 +53,7 @@ export default async function Header({postId, baseUrl, author}) {
             <Link href={`/users/${author}/`}>
                 <div>
                     <div className={styles.img}>
-                        {postAuthor['profile_img'] && <img src={'https://saifchan.online'+postAuthor['profile_img']} />}
+                        {postAuthor['profile_img'] && <img src={process.env.BASE_URL+postAuthor['profile_img']} />}
                     </div>
                     <span>
                         {postAuthor && (<>@{postAuthor.username}</>)}

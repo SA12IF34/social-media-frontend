@@ -9,7 +9,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const api = axios.create({
-    baseURL: 'https://saifchan.online/projects/social_media/'
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
 })
 
 
@@ -57,7 +57,7 @@ function Post({len, p}) {
                 <Link href={`/users/${author.id}/`}>
                   <div className={styles.authorAccount}>
                     <div className={styles.img}>
-                      {author.profile_img && <img src={'https://saifchan.online'+author.profile_img} />}
+                      {author.profile_img && <img src={process.env.NEXT_PUBLIC_BASE_URL+author.profile_img} />}
                     </div>
                     <div>
                       <h4>{author['fname']} {author['lname']}</h4>
@@ -73,9 +73,10 @@ function Post({len, p}) {
               <br />
               <br />
               <div>
-                  {p.file && <img src={'https://saifchan.online'+p.file} alt="post " />}
+                  {p.file && <img src={process.env.NEXT_PUBLIC_BASE_URL+p.file} alt="post " />}
               </div>
           </div>
+          
         </div>
       </Link>
 

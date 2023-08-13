@@ -416,6 +416,7 @@
 
     .main {
       width: 100vw;
+      border-right: none;
     }
 
     .sideParent {
@@ -426,7 +427,6 @@
       position: absolute;
       z-index: 1000;
       background: black;
-      border-top: 1px solid white;
     }
     .side {
       width: 100%;
