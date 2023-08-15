@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import styles from '@/app/styles/post.module.css';
-import DeletePost from './DeletePost';
+import PostMenu from './PostMenu';
 
 async function getAuthor(baseUrl, author) {
     const res = await fetch(`${baseUrl}/projects/social_media/accounts/${author}/`, {
@@ -60,7 +60,7 @@ export default async function Header({postId, baseUrl, author}) {
                     </span>
                 </div>
             </Link>
-            {isAuthor && <DeletePost postId={postId} />}
+            {isAuthor && <PostMenu postId={postId} />}
         </div>
     )
 }

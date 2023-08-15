@@ -120,7 +120,7 @@
 
 .post {
     width: 100%;
-    min-height: 90vh;
+
     height: max-content;
     border-bottom: 1px solid var(--color);
 }
@@ -167,19 +167,21 @@
     margin-left: 10px;
 }
 
-.postAuthor button {
-    width: max-content;
-    height: max-content;
-    padding: 7px;
-    background-color: black;
-    color: white;
-    border: 1px solid white;
-    border-radius: 7px;
+
+.postMenuContainer {
+    width: min-content;
+    height: min-content;
+    position: relative;
+}
+
+.postMenuContainer svg {
+    position: relative;
+    font-size: 1.2em;
 }
 
 .postContent {
    width: 100%;
-   min-height: calc(90vh - 70px); 
+   min-height: 250px; 
    height: max-content;
    padding: 10px;
 }
@@ -258,11 +260,55 @@
     padding: 10px;
     padding-bottom: 30px;
     border-bottom: 1px solid var(--color);
+    position: relative;
 }
 .commentContent {
     margin: 10px;
 }
 
+.comment .options {
+    background-color: transparent;
+    width: max-content;
+    height: max-content;
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 1000;
+    /* color: white; */
+}
+.comment .options svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: white;
+    font-size: 1.5em;
+    z-index: 1;
+}
+
+
+
+.optionsContainer, .menu {
+    position: absolute;
+    right: 100%;
+    top: 100%;
+    width: 80px;
+    height: max-content;
+    background-color: black;
+    border: 1px solid white;
+}
+
+.optionsContainer button,
+.menu button {
+    width: 100%;
+    height: 30px;
+    padding: 7px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    outline: none;
+}
 
 
 @media screen and (max-width: 913px) {

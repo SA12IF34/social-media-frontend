@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react';
 import styles from '@/app/styles/post.module.css';
 
-function PostBoard() {
+function PostBoard({text, img}) {
 
   let n = 0;
   useEffect(() => {
@@ -10,6 +10,11 @@ function PostBoard() {
     let post = document.getElementById('post');
     let ele = document.getElementById("write");
     let fileInput = document.getElementById("file");
+
+    if (text) {
+      ele.innerHTML = text;
+    }
+
     fileInput.onchange = async () => {
 
       let reader = new FileReader()
@@ -42,9 +47,13 @@ function PostBoard() {
     <div className={styles.board}>
         <div id='post' className={styles.write}>
           <span contentEditable role="textbox" id='write'>
-
           </span>
           <br/>
+          {img && 
+            <div className={styles.imgContainer}>
+              <img src={process.env.NEXT_PUBLIC_BASE_URL+img} />
+            </div>
+            }
         </div>
     </div>
   )

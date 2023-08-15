@@ -40,6 +40,26 @@ async function getComments(postId) {
     }
 }
 
+
+async function getMyAccount() {
+    const res = await fetch(`${baseUrl}/projects/social_media/me/`, {
+        method: 'GET',
+        headers: {
+            Cookie: cookies().toString()
+        },
+        cache: 'no-store'
+    });
+
+    if (res.status === 200) {
+        const data = await res.json();
+
+        return data['username'];
+    } else if (res.status === 403) {
+        return false;
+    }
+
+}
+
 export const metadata = {
     title: 'post'
 }
@@ -48,9 +68,11 @@ export const metadata = {
 export default async function Post({params: { post }}) {
     let postObj;
     let postComments;
+    let username;
     try {
         postObj = await getPost(post);
         postComments = await getComments(post);
+        username = await getMyAccount();
     } catch (error) {
         redirect('/')
     }
@@ -81,9 +103,9 @@ export default async function Post({params: { post }}) {
                         <Reaction post={postObj} />
                     </div>
                     
-                    <Comments postId={post} comments={postComments} />
+                    <Comments postId={post} comments={postComments} username={username} />
                 </div>
             </div>
         </div>
     )
-}
+} 

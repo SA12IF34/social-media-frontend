@@ -11,13 +11,14 @@ const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
 })
 
-function ShareButton() {
 
-  async function handleShare() {
+function EditButton({post}) {
+
+  async function handleEdit() {
     let fileInput = document.getElementById("file");
     let textContent = document.getElementById('write').innerText;
-    let editContent = (document.getElementById('write').innerHTML);
-    
+    let editContent = document.getElementById('write').innerHTML;
+
     let data = {
         content: textContent,
         edit_content: editContent
@@ -25,26 +26,24 @@ function ShareButton() {
     if (fileInput.files[0]) {
         data['file'] = fileInput.files[0]
     }
-
-    const res = await api.post('posts/', data, {
+    const res = await api.patch(`posts/${post}/edit/`, data, {
         headers: {
             'Accept': "application/json",
             'Content-Type': "multipart/form-data"
         }
     })
 
-    if (res.status === 201) {
+    if (res.status === 202) {
         window.location.assign('/me');
     }
-
   }
 
   return (
     <button onClick={(e) => {
         e.preventDefault();
-        handleShare();
-    }} className={styles.share}>share</button>
+        handleEdit();
+    }} className={styles.share}>edit</button>
   )
 }
 
-export default ShareButton;
+export default EditButton;

@@ -43,8 +43,8 @@ export default async function CreatePost() {
                 <PostBoard />
                 <div className={styles.assets}>
                     <div>
-                        <h2>attach a file</h2>
-                        <h5>Drag a file here or press upload</h5>
+                        <h2>attach an image</h2>
+                        <h5>Drag an image here or press upload</h5>
                         <br/>
                         <label htmlFor='file' >upload</label>
                         <input type="file" id='file' name='file' />
