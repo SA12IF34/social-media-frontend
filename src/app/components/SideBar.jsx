@@ -5,7 +5,8 @@ import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import {BiHomeAlt2, BiImageAdd, BiSearch, BiArrowBack} from 'react-icons/bi';
 import {MdOutlineNotificationsNone} from 'react-icons/md';
-import {CgProfile} from 'react-icons/cg'
+import {CgProfile} from 'react-icons/cg';
+import {MdClear} from 'react-icons/md'
 import axios from 'axios';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -21,11 +22,36 @@ function SideBar({content, className}) {
   const [searchVal, setSearchVal] = useState('');
   const searchRef = useRef();
   const [results, setResults] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   let val = '';
   
+  async function getNotifications() {
+    const res = await api.get('notifications/');
+    if (res.status === 200) {
+        const data = await res.data;
+
+        setNotifications(data);
+        if (data.length > 0) {
+            let notificationsEle = document.getElementById('notifications');
+            let span = document.createElement('span');
+            span.id = 'notify';
+            span.innerHTML = `
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 0 1 0-96 48.01 48.01 0 0 1 0 96z"></path>
+            </svg>
+            `;
+            notificationsEle.appendChild(span);
+        }
+    } else {
+        return;
+    }
+  }
+
   let n = 0;
   useEffect(() => {
     if (n < 1) {
+
+        getNotifications();
 
         let side = document.getElementById("side");
 
@@ -65,8 +91,15 @@ function SideBar({content, className}) {
 
         })
 
-        let notifications = document.getElementById("notifications")
-        notifications.addEventListener("click", (e) => {
+        let notificationsEle = document.getElementById("notifications");
+        
+
+        notificationsEle.addEventListener("click", (e) => {
+            let span = notificationsEle.querySelector('#notify');
+            if (span) {
+                span.remove();
+            }
+
             if (window.matchMedia('(min-width: 914px)').matches) {
                 e.preventDefault();
 
@@ -105,6 +138,18 @@ function SideBar({content, className}) {
         }
     } else {
         setResults([]);
+    }
+  }
+
+  async function handleDeleteNotification(id) {
+    const res = await api.delete(`notification/${id}/delete/`);
+
+    if (res.status === 202) {
+        const data = await res.data;
+        setNotifications(data);
+        return;
+    } else {
+        alert("there is a problem");
     }
   }
 
@@ -192,7 +237,25 @@ function SideBar({content, className}) {
             <BiArrowBack />
         </button>
         <ul>
-
+            {notifications && notifications.map(notification => {
+                return (
+                    <li className={styles.notification}>
+                        <Link href={`/users/${notification.account}/`}>
+                            <p>
+                                {notification.notification_type === 'follow' 
+                                ? (<>{notification.username} has followed you</>) 
+                                : (<>{notification.username} has unfollowed you</>)}
+                            </p>
+                            <span onClick={(e) => {
+                                e.preventDefault();
+                                handleDeleteNotification(notification.id)
+                            }} className={styles.remove}>
+                                <MdClear />
+                            </span>
+                        </Link>
+                    </li>
+                )
+            })}
         </ul>
     </div> 
     </div> 

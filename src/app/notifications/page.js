@@ -1,10 +1,17 @@
+import styles from '@/app/styles/search.module.css';
+import SideBar from '../components/SideBar';
+import Notifications from '../components/Notifications';
 
+export const metadata = {
+    title: 'notifications'
+}
 
-export default function Notifications () {
+export default function NotificationsPage () {
 
     return (
-        <h3>
-        Notifications
-        </h3>
+        <div className={styles.container}>
+            <SideBar />
+            <Notifications />
+        </div>
     )
 }
