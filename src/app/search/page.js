@@ -7,13 +7,13 @@ export const metadata = {
   title: 'search'
 }
 
-function page() {
+function SearchComponent() {
   return (
-    <div className={styles.container}>
+    <div data-testid='search' className={styles.container}>
       <SideBar />
       <Search />
     </div>
   )
 }
 
-export default page
+export default SearchComponent;

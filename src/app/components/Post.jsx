@@ -11,19 +11,22 @@ axios.defaults.withCredentials = true;
 const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
 })
-
+export {api};
 
 function Post({len, p}) {
 
   const [author, setAuthor] = useState(); 
 
   async function getAuthor() {
-    const res = await api.get(`accounts/${p.author}/`);
+    try {
+      const res = await api.get(`accounts/${p.author}/`);
+      if (res.status === 200) {
+        const data = await res.data;
+        setAuthor(data);
 
-    if (res.status === 200) {
-      const data = await res.data;
-      setAuthor(data);
-
+      }
+    } catch (error) {
+      return;
     }
 
   }
@@ -51,7 +54,7 @@ function Post({len, p}) {
   return (
     <Link style={{color: 'white', textDecoration: 'none'}} href={`/posts/${p['post_id']}/`}>
         <div>
-          <div className={styles.post}>
+          <div data-testid='post' className={styles.post}>
             {
               author ? (
                 <Link href={`/users/${author.id}/`}>
@@ -61,7 +64,7 @@ function Post({len, p}) {
                     </div>
                     <div>
                       <h4>{author['fname']} {author['lname']}</h4>
-                      <h5>@{author['username']}</h5>
+                      <h5 data-testid='post-author'>@{author['username']}</h5>
                     </div>
                   </div>
                 </Link>

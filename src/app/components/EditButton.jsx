@@ -10,7 +10,7 @@ axios.defaults.withCredentials = true;
 const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
 })
-
+export {api};
 
 function EditButton({post}) {
 

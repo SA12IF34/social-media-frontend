@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import styles from '@/app/styles/post.module.css';
-import PostMenu from './PostMenu';
+import PostMenu from '../../components/PostMenu';
 
 async function getAuthor(baseUrl, author) {
     const res = await fetch(`${baseUrl}/projects/social_media/accounts/${author}/`, {
@@ -41,21 +41,19 @@ async function checkAuthor(baseUrl, author) {
 
     return false;
 }
-
-export default async function Header({postId, baseUrl, author}) { 
-
+ 
+async function Header({postId, baseUrl, author}) { 
     const postAuthor = await getAuthor(baseUrl, author);
     const isAuthor = await checkAuthor(baseUrl, author);
 
-    return (
-        
+    return (  
         <div className={styles.postAuthor}>
             <Link href={`/users/${author}/`}>
                 <div>
                     <div className={styles.img}>
                         {postAuthor['profile_img'] && <img src={process.env.BASE_URL+postAuthor['profile_img']} />}
                     </div>
-                    <span>
+                    <span >
                         {postAuthor && (<>@{postAuthor.username}</>)}
                     </span>
                 </div>
@@ -64,3 +62,5 @@ export default async function Header({postId, baseUrl, author}) {
         </div>
     )
 }
+
+export default Header;

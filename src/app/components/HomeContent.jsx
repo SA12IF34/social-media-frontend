@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from '@/app/styles/page.module.css';
 import Post from './Post';
-import axios from 'axios';
+import axios from 'axios'; 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -10,8 +10,8 @@ axios.defaults.withCredentials = true;
 
 const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
-})
-
+});
+export {api}; 
 
 function MainContent() {
 
@@ -33,9 +33,7 @@ function MainContent() {
   }
 
   async function getForyou() {
-    
     const res = await api.get(`posts/type/foryou/`);
-     
     if (res.status === 200) {
       const data = await res.data;
       // setLimit(limit+10);
@@ -77,7 +75,7 @@ function MainContent() {
   }, [])
 
   return (
-    <div className={styles.main}>
+    <div data-testid='container' className={styles.main}>
         <div id='contentType' className={styles.contentChoices}>
           <h4 id='foryou'>For You</h4>
           <h4 className={styles.chosen} id='latest'>Latest</h4>
@@ -96,4 +94,4 @@ function MainContent() {
   )
 }
 
-export default MainContent;
+export default MainContent; 

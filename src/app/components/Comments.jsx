@@ -12,7 +12,7 @@ axios.defaults.withCredentials = true;
 const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
 })
-
+export {api};
 
 function Comments({postId, comments, username}) {
 
@@ -24,8 +24,7 @@ function Comments({postId, comments, username}) {
             content: commentRef.current.value
         })
         
-        if (res.status === 201) {
-            console.log("Done !");
+        if (res.status === 201) { 
             const data = await res.data;
             let comments = document.getElementById("comments");
             let ele = document.createElement('div');
@@ -59,6 +58,7 @@ function Comments({postId, comments, username}) {
             comments.insertBefore(ele, comments.firstElementChild) :
             comments.appendChild(ele);
             commentRef.current.value = '';
+
         }
     } catch (error) {
         if (error.response) {
@@ -87,8 +87,8 @@ function Comments({postId, comments, username}) {
         return;
     }
 
+    
     let options = e.target.parentElement;
-    console.log(options)
 
     let div = document.createElement('div');
     let btn1 = document.createElement('button');
@@ -96,6 +96,8 @@ function Comments({postId, comments, username}) {
 
     btn1.textContent = 'Delete';
     btn2.textContent = 'Close';
+
+    btn1.setAttribute('data-testid', 'delete-btn')
 
     div.append(btn1,btn2);
     options.appendChild(div);
@@ -115,31 +117,31 @@ function Comments({postId, comments, username}) {
 
 
   return (
-    <div className={styles.commentsContainer}>
+    <div data-testid='comments-component' className={styles.commentsContainer}>
         <div className={styles.postComment}>
             <h4>post a comment</h4>
             <br />
             <div>
-                <input type="text" id='comment' className={styles.commentInput} ref={commentRef} />
-                <button onClick={() => {
+                <input data-testid='comment-input' type="text" id='comment' className={styles.commentInput} ref={commentRef} />
+                <button data-testid='comment-btn' onClick={() => {
                     handleComment();
                 }} className={styles.commentBtn}>
                     comment
                 </button>
             </div>
         </div>
-        <div id='comments' className={styles.comments}>
+        <div data-testid='comments' id='comments' className={styles.comments}>
             {comments && comments.length > 0 
             ? comments.map(c => {
                 return (
-                    <div key={c.id} id={`${c.id}`} className={styles.comment}>
+                    <div data-testid='comment' key={c.id} id={`${c.id}`} className={styles.comment}>
                         <h4 className={styles.commentAuthor}>@{c.author}</h4>
                         <p className={styles.commentContent}>
                             {c.content}
                         </p>
                         {username === c.author ? (
                             <div onClick={handleClick} id='options' className={styles.options}>
-                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <svg data-testid='menu-btn' stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
                                 </svg>
                             </div>

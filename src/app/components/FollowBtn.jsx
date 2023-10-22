@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, {useState} from 'react';
 import styles from '@/app/styles/profile.module.css';
 import axios from 'axios';
 
@@ -9,10 +9,12 @@ axios.defaults.withCredentials = true;
 
 const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
-})
+});
+export {api};
 
 function FollowBtn({following, target}) {
 
+  const [isFollowing, setFollowing] = useState(following)
 
   async function handleFollow() {
     const res = await api.post('follow/', {
@@ -20,7 +22,9 @@ function FollowBtn({following, target}) {
     });
 
     if (res.status === 202) {
-        window.location.reload();
+      setFollowing(true);
+      window.location.reload(); 
+
     }
   }
 
@@ -30,6 +34,7 @@ function FollowBtn({following, target}) {
     });
 
     if (res.status === 202) {
+      setFollowing(false);
       window.location.reload();
     }
   }
@@ -41,7 +46,7 @@ function FollowBtn({following, target}) {
         } else {
           handleFollow();
         }
-    }} className={styles.followBtn}>{following ? (<>unfollow</>) : (<>follow</>)}</button>
+    }} className={styles.followBtn}>{isFollowing ? (<>unfollow</>) : (<>follow</>)}</button>
   )
 }
 

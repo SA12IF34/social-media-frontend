@@ -1,10 +1,10 @@
 import SideBar from "@/app/components/SideBar";
 import styles from '@/app/styles/post.module.css';
-import Header from '@/app/components/PostHeader';
+import Header from './PostHeader';
 import Reaction from "@/app/components/Reaction";
 import Comments from "@/app/components/Comments";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+
 
 const baseUrl = process.env.BASE_URL;
 
@@ -66,17 +66,10 @@ export const metadata = {
 
 
 export default async function Post({params: { post }}) {
-    let postObj;
-    let postComments;
-    let username;
-    try {
-        postObj = await getPost(post);
-        postComments = await getComments(post);
-        username = await getMyAccount();
-    } catch (error) {
-        redirect('/')
-    }
-
+    let postObj = await getPost(post);
+    let postComments = await getComments(post);
+    let username = await getMyAccount();
+    
     return (
         <div className={styles.container}>
             

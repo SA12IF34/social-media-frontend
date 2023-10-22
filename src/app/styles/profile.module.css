@@ -202,6 +202,10 @@
     font-size: 1.5em;
 }
 
+.doesNotExist {
+    padding: 25px;
+}
+
 @media screen and (max-width: 913px) {
     .main {
         width: 100vw;

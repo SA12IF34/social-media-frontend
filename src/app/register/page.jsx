@@ -27,6 +27,7 @@ function Register() {
   const [imgData, setImgData] = useState();
   const [img, setImg] = useState();
 
+
   async function handleCreate() {
 
     if (pswrdRef.current.value === pswrdRef2.current.value) {
@@ -40,13 +41,14 @@ function Register() {
         if (img) {
             data['img'] = img;
         }
+        
         const res = await api.post('create-account/', data, {
             headers: {
                 'Accept': "application/json",
                 'Content-Type': "multipart/form-data"
             }
         })
-        
+    
         if (res.status === 201) {
             window.localStorage.setItem('auth', 'yes');
             window.location.assign('/');
@@ -97,7 +99,7 @@ function Register() {
         </title>
     </Head>
     <div className={styles.main}>
-        <div>
+        <div >
             <h3>
                 Signup :
             </h3>
@@ -147,4 +149,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Register;
