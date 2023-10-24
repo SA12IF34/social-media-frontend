@@ -14,4 +14,4 @@ to run tests of one test suite
 npm run test <name>.test.js/jsx
 ```
 ___
-[link to the project](https://name.saifchan.online
+[link to the project](https://name.saifchan.online)
