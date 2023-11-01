@@ -27,7 +27,7 @@ function Reaction({post}) {
       if (disliked) {
         setDislikesNum(dislikesNum-1);
       }
-    } else if (res.status === 204) {
+    } else if (res.status === 205) {
       setLikesNum(likesNum-1);
     }
   }
@@ -39,7 +39,7 @@ function Reaction({post}) {
       if (liked) {
         setLikesNum(likesNum-1)
       }
-    } else if (res.status === 204) {
+    } else if (res.status === 205) {
       setDislikesNum(dislikesNum-1);
     }
   }

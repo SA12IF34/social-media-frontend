@@ -21,16 +21,20 @@ export default function Account() {
     const pswrdRef = useRef();
 
     async function handleLogin() {
-        const res = await api.post('login/', {
-            username: nameRef.current.value.toLowerCase(),
-            email: emailRef.current.value,
-            password: pswrdRef.current.value
-        })
-        if (res.status === 202) {
-            window.localStorage.setItem('auth', 'yes');
-            window.location.assign('/');
-        }else if (res.status === 404) {
-            alert("user not found");
+        try {
+            const res = await api.post('login/', {
+                username: nameRef.current.value.toLowerCase(),
+                email: emailRef.current.value,
+                password: pswrdRef.current.value
+            })
+            if (res.status === 202) {
+                window.localStorage.setItem('auth', 'yes');
+                window.location.assign('/');
+            }
+        } catch (error) {
+            if (error['response']['status'] === 404) {
+                alert("User does not exist or you entered wrong data.")
+            }  
         }
     }
 

@@ -31,40 +31,44 @@ function Register() {
   async function handleCreate() {
 
     if (pswrdRef.current.value === pswrdRef2.current.value) {
-        let data = {
-            first_name: fnameRef.current.value.charAt(0).toUpperCase() + fnameRef.current.value.slice(1),
-            last_name: lnameRef.current.value.charAt(0).toUpperCase() + lnameRef.current.value.slice(1),
-            username: nameRef.current.value.toLowerCase(),
-            email: emailRef.current.value,
-            password: pswrdRef.current.value
-        }
-        if (img) {
-            data['img'] = img;
-        }
-        
-        const res = await api.post('create-account/', data, {
-            headers: {
-                'Accept': "application/json",
-                'Content-Type': "multipart/form-data"
+        try {
+            let data = {
+                first_name: fnameRef.current.value.charAt(0).toUpperCase() + fnameRef.current.value.slice(1),
+                last_name: lnameRef.current.value.charAt(0).toUpperCase() + lnameRef.current.value.slice(1),
+                username: nameRef.current.value.toLowerCase(),
+                email: emailRef.current.value,
+                password: pswrdRef.current.value
             }
-        })
-    
-        if (res.status === 201) {
-            window.localStorage.setItem('auth', 'yes');
-            window.location.assign('/');
-        
-        } else if (res.status ===  400) {
-            const data = await res.data;
+            if (img) {
+                data['img'] = img;
+            }
             
-            if (data['response'] === 'email') {
-                alert("email already exists");
-            } else if (data['response'] === 'username') {
-                alert("username must be unique")
+            const res = await api.post('create-account/', data, {
+                headers: {
+                    'Accept': "application/json",
+                    'Content-Type': "multipart/form-data"
+                }
+            })
+
+            if (res.status === 201) {
+                window.localStorage.setItem('auth', 'yes');
+                window.location.assign('/');
+            
             }
-        
-        } else {
-            alert("there are some problems on server side ")
-        }
+        } catch (error) {
+            if (error['response']['status'] === 500) {
+                alert("We encountered some problem creating your account, please try later.");
+            }
+
+            if (error['response']['data']['response'] === 'email'){
+                alert("Email Already Exists.")
+            } 
+            
+            if (error['response']['data']['response'] === 'username') {
+                alert("Username Already Exists.")
+            }
+            
+        } 
     } else {
         alert("password doesn't match");
     }
