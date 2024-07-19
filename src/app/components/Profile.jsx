@@ -77,9 +77,9 @@ function Profile({
                 {
                 contentName === 'posts' ? posts && posts.length > 0 ? posts.map(mapPosts)
                 : me ? (<h2>you didn't share anything yet</h2>) : (<h2>{fname} didn't share anything yet</h2>)
-                : contentName === 'followers' ? followers.length > 0 ? followers.map(mapAccounts) 
+                : contentName === 'followers' ? followers && followers.length > 0 ? followers.map(mapAccounts) 
                 : me ? (<h2>you don't have followers</h2>) : (<h2>{fname} doesn't have followers</h2>)
-                : contentName === 'followings' ? followings.length > 0 ? followings.map(mapAccounts) 
+                : contentName === 'followings' ? followers && followings.length > 0 ? followings.map(mapAccounts) 
                 : me ? (<h2>you didn't follow anyone</h2>) : (<h2>{fname} didn't follow anyone</h2>) : (<h2>we ran into a problem</h2>)
                 }
             </div>
