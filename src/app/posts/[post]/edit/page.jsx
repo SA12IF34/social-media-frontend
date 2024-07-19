@@ -10,7 +10,7 @@ const baseUrl = process.env.BASE_URL;
 
 
 async function getPost(postId) {
-    const res = await fetch(`${baseUrl}/projects/social_media/posts/${postId}/edit/`, {
+    const res = await fetch(`${baseUrl}/social_media/posts/${postId}/edit/`, {
         method: 'GET',
         headers: {
             Cookie: cookies().toString()

@@ -4,7 +4,7 @@ import styles from '@/app/styles/post.module.css';
 import PostMenu from '../../components/PostMenu';
 
 async function getAuthor(baseUrl, author) {
-    const res = await fetch(`${baseUrl}/projects/social_media/accounts/${author}/`, {
+    const res = await fetch(`${baseUrl}/social_media/accounts/${author}/`, {
         method: 'GET', 
         headers: {
             Cookie: cookies().toString()
@@ -23,7 +23,7 @@ async function getAuthor(baseUrl, author) {
 async function checkAuthor(baseUrl, author) {
     var cookie = cookies().get('sessionid');
     if (cookie) {
-        const res = await fetch(`${baseUrl}/projects/social_media/me/`, {
+        const res = await fetch(`${baseUrl}/social_media/me/`, {
             method: 'GET',
             headers: {
                 Cookie: cookies().toString()

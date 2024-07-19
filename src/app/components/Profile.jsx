@@ -75,7 +75,7 @@ function Profile({
             </div>
             <div id='' className={styles.content}>
                 {
-                contentName === 'posts' ? posts.length > 0 ? posts.map(mapPosts)
+                contentName === 'posts' ? posts && posts.length > 0 ? posts.map(mapPosts)
                 : me ? (<h2>you didn't share anything yet</h2>) : (<h2>{fname} didn't share anything yet</h2>)
                 : contentName === 'followers' ? followers.length > 0 ? followers.map(mapAccounts) 
                 : me ? (<h2>you don't have followers</h2>) : (<h2>{fname} doesn't have followers</h2>)

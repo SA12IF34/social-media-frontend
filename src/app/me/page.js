@@ -7,7 +7,7 @@ import Profile from '../components/Profile';
 import {RiSettings5Fill} from 'react-icons/ri';
 
 
-const baseUrl = process.env.BASE_URL+'/projects/social_media/';
+const baseUrl = process.env.BASE_URL+'/social_media/';
 
 async function getAccount() {
     const res = await fetch(baseUrl+'me/', {

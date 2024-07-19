@@ -9,7 +9,7 @@ import Profile from '@/app/components/Profile';
 const baseUrl = process.env.BASE_URL;
 async function getUser(userId) {
     try {
-        const res = await fetch(`${baseUrl}/projects/social_media/accounts/${userId}/`, {
+        const res = await fetch(`${baseUrl}/social_media/accounts/${userId}/`, {
             method: 'GET',
             headers: {
                 Cookie: cookies().toString()
@@ -42,7 +42,7 @@ async function getUser(userId) {
 
 async function getUserPosts(user) {
     try {
-        const res = await fetch(`${baseUrl}/projects/social_media/posts/author/${user}/`, {
+        const res = await fetch(`${baseUrl}/social_media/posts/author/${user}/`, {
             method: 'GET',
             headers: {
                 Cookie: cookies().toString()

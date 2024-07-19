@@ -8,7 +8,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/projects/social_media/'
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL+'/social_media/'
 })
 
 function ShareButton() {

@@ -82,7 +82,7 @@ describe('testing side bar component', () => {
         await act(async () => render(<SideBar />));
 
         let btns = screen.getAllByTestId('delete-notification');
-
+        
         expect(btns.length).toBe(2);
 
         await userEvent.click(btns[1]);

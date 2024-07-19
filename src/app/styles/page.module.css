@@ -167,7 +167,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1px solid var(--color);
 }
 
 .search button {
@@ -175,6 +174,7 @@
 }
 .notifications button {  
   width: 100%;
+  border-bottom: 1px solid var(--color);
 }
 
 .results {

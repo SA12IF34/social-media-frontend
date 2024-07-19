@@ -6,7 +6,7 @@ import SideBar from './components/SideBar';
 import MainContent from './components/HomeContent';
 
 
-const baseUrl = process.env.BASE_URL+'/projects/social_media/';
+const baseUrl = process.env.BASE_URL+'/social_media/';
  
 async function getAccount(baseUrl) {
   try {

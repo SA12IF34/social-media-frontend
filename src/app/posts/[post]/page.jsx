@@ -9,7 +9,7 @@ import { cookies } from "next/headers";
 const baseUrl = process.env.BASE_URL;
 
 async function getPost(postId) {
-    const res = await fetch(`${baseUrl}/projects/social_media/posts/${postId}/`, {
+    const res = await fetch(`${baseUrl}/social_media/posts/${postId}/`, {
         method: 'GET',
         headers: {
             Cookie: cookies().toString()
@@ -25,7 +25,7 @@ async function getPost(postId) {
 };
 
 async function getComments(postId) {
-    const res = await fetch(`${baseUrl}/projects/social_media/comments/${postId}/`, {
+    const res = await fetch(`${baseUrl}/social_media/comments/${postId}/`, {
         method: 'GET',
         headers: {
             Cookie: cookies().toString()
@@ -42,7 +42,7 @@ async function getComments(postId) {
 
 
 async function getMyAccount() {
-    const res = await fetch(`${baseUrl}/projects/social_media/me/`, {
+    const res = await fetch(`${baseUrl}/social_media/me/`, {
         method: 'GET',
         headers: {
             Cookie: cookies().toString()
