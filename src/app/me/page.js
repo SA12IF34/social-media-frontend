@@ -119,7 +119,7 @@ export default async function MyProfile() {
                     </div>
                     <div>
                         <span>
-                            following {data['followings'] && data['followings'].length}
+                            following {data['followings'].length}
                         </span>
                         <span>
                             followers {followers && followers.length}
