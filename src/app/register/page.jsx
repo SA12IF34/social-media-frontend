@@ -57,7 +57,7 @@ function Register() {
             }
         } catch (error) {
             if (error['response']['status'] === 500) {
-                print(error)
+                console.log(error)
                 alert("We encountered some problem creating your account, please try later.");
             }
 
