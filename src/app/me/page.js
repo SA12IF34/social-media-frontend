@@ -119,10 +119,10 @@ export default async function MyProfile() {
                     </div>
                     <div>
                         <span>
-                            following {data['followings'].length}
+                            following {data['followings'] ? data['followings'].length: 0}
                         </span>
                         <span>
-                            followers {followers && followers.length}
+                            followers {followers ? followers.length : 0}
                         </span>
                     </div> 
                     <Link href={'/me/settings/'} className={styles.settings}>
